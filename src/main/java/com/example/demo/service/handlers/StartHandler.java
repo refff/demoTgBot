@@ -1,5 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.service.handlers;
 
+import com.example.demo.service.RequestHandler;
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,6 @@ public class StartHandler implements RequestHandler {
 
     @Override
     public String handleCommand(Update update) {
-        return "";
+        return "Hi";
     }
 }

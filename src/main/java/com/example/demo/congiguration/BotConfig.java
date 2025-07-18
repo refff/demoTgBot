@@ -1,16 +1,24 @@
 package com.example.demo.congiguration;
 
+import com.github.kshashov.telegram.config.TelegramBotGlobalProperties;
+import com.github.kshashov.telegram.config.TelegramBotGlobalPropertiesConfiguration;
+import com.pengrad.telegrambot.TelegramBot;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-@Configuration
-@ConfigurationProperties(prefix = "telegram-bot")
-@Getter
-@Setter
-public class BotConfig {
+
+@Component
+public class BotConfig implements TelegramBotGlobalPropertiesConfiguration {
+
+    @Getter
+    @Value(value = "${telegram-bot.token}")
     private String token;
-    private String name;
-    private String url;
+
+    public static TelegramBot telegramBot;
+
+    @Override
+    public void configure(TelegramBotGlobalProperties.Builder builder) {
+        builder.processBot(token, bot -> telegramBot = bot);
+    }
 }
