@@ -9,6 +9,6 @@ public class StartHandler implements RequestHandler {
 
     @Override
     public String handleCommand(Update update) {
-        return "Hi";
+        return "Hi, that's my bot, you're welcome";
     }
 }

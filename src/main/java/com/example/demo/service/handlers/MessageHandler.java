@@ -9,6 +9,6 @@ public class MessageHandler implements RequestHandler {
 
     @Override
     public String handleCommand(Update update) {
-        return "";
+        return update.message().text();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.congiguration;
+package com.example.demo.configuration;
 
 import com.github.kshashov.telegram.config.TelegramBotGlobalProperties;
 import com.github.kshashov.telegram.config.TelegramBotGlobalPropertiesConfiguration;

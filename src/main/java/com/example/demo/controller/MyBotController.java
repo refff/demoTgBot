@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.congiguration.BotConfig;
+import com.example.demo.configuration.BotConfig;
+import com.example.demo.service.handlers.ForwardButtonHandler;
 import com.example.demo.service.handlers.MenuHandler;
 import com.example.demo.service.handlers.MessageHandler;
 import com.example.demo.service.handlers.StartHandler;
@@ -19,16 +20,19 @@ public class MyBotController implements TelegramMvcController {
     private StartHandler startHandler;
     private MessageHandler messageHandler;
     private MenuHandler menuHandler;
+    private ForwardButtonHandler forwardButtonHandler;
 
     @Autowired
     public MyBotController(StartHandler startHandler,
                            MessageHandler messageHandler,
                            BotConfig config,
-                           MenuHandler menuHandler) {
+                           MenuHandler menuHandler,
+                           ForwardButtonHandler forwardButtonHandler) {
         this.startHandler = startHandler;
         this.messageHandler = messageHandler;
         this.config = config;
         this.menuHandler = menuHandler;
+        this.forwardButtonHandler = forwardButtonHandler;
     }
 
     @Override
@@ -51,9 +55,9 @@ public class MyBotController implements TelegramMvcController {
         return messageHandler.handleCommand(update);
     }
 
-    @CallbackQueryRequest(value = "back")
-    public String back(Update update) {
-        return "back";
+    @CallbackQueryRequest(value = "menu_main_page")
+    public void back(Update update) {
+        menu(update);
     }
 
     @CallbackQueryRequest(value = "action")
@@ -67,7 +71,7 @@ public class MyBotController implements TelegramMvcController {
     }
 
     @CallbackQueryRequest(value = "forward")
-    public String forward(Update update) {
-        return "there're nothing for now";
+    public void forward(Update update) {
+        forwardButtonHandler.handle(update);
     }
 }
