@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.configuration.BotConfig;
-import com.example.demo.service.handlers.ForwardButtonHandler;
-import com.example.demo.service.handlers.MenuHandler;
+import com.example.demo.service.handlers.menu.SecondMenuPageButtonHandler;
+import com.example.demo.service.handlers.menu.MenuHandler;
 import com.example.demo.service.handlers.MessageHandler;
 import com.example.demo.service.handlers.StartHandler;
 import com.github.kshashov.telegram.api.TelegramMvcController;
@@ -20,19 +20,19 @@ public class MyBotController implements TelegramMvcController {
     private StartHandler startHandler;
     private MessageHandler messageHandler;
     private MenuHandler menuHandler;
-    private ForwardButtonHandler forwardButtonHandler;
+    private SecondMenuPageButtonHandler secondMenuPageButtonHandler;
 
     @Autowired
     public MyBotController(StartHandler startHandler,
                            MessageHandler messageHandler,
                            BotConfig config,
                            MenuHandler menuHandler,
-                           ForwardButtonHandler forwardButtonHandler) {
+                           SecondMenuPageButtonHandler secondMenuPageButtonHandler) {
         this.startHandler = startHandler;
         this.messageHandler = messageHandler;
         this.config = config;
         this.menuHandler = menuHandler;
-        this.forwardButtonHandler = forwardButtonHandler;
+        this.secondMenuPageButtonHandler = secondMenuPageButtonHandler;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class MyBotController implements TelegramMvcController {
 
     @CallbackQueryRequest(value = "action")
     public String action(Update update) {
-        return "action";
+        return "did something";
     }
 
     @CallbackQueryRequest(value = "nothing")
@@ -70,8 +70,8 @@ public class MyBotController implements TelegramMvcController {
         return "nothing";
     }
 
-    @CallbackQueryRequest(value = "forward")
-    public void forward(Update update) {
-        forwardButtonHandler.handle(update);
+    @CallbackQueryRequest(value = "menuSecondPage")
+    public void secondMenu(Update update) {
+        secondMenuPageButtonHandler.handle(update);
     }
 }
