@@ -1,11 +1,8 @@
 package com.example.demo.configuration;
 
-import com.example.demo.entity.UserPRs;
-import com.example.demo.entity.UserProfile;
-import com.example.demo.persistance.UserPRsRepository;
+import com.example.demo.entities.UserProfile;
 import com.example.demo.persistance.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

@@ -1,6 +1,6 @@
 package com.example.demo.persistance;
 
-import com.example.demo.entity.UserProfile;
+import com.example.demo.entities.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

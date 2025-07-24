@@ -1,8 +1,8 @@
 package com.example.demo.service.handlers.menu;
 
 import com.example.demo.configuration.BotConfig;
-import com.example.demo.entity.UserPRs;
-import com.example.demo.entity.UserProfile;
+import com.example.demo.entities.UserPRs;
+import com.example.demo.entities.UserProfile;
 import com.example.demo.persistance.UserPRsRepository;
 import com.example.demo.persistance.UserProfileRepository;
 import com.example.demo.service.RequestHandler;
@@ -69,8 +69,10 @@ public class ProfileHandler implements RequestHandler {
 
     private InlineKeyboardMarkup assignKeyboard() {
         var backButton = new InlineKeyboardButton("⬅\uFE0F back").callbackData("menu_main_page");
+        var editButton = new InlineKeyboardButton("\uD83E\uDE86 edit").callbackData("edit_profile");
 
         return new InlineKeyboardMarkup()
+                .addRow(editButton)
                 .addRow(backButton);
     }
 

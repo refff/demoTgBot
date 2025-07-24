@@ -22,16 +22,17 @@ public class SecondMenuHandler implements RequestHandler {
         int message_id = update.callbackQuery().message().messageId();
         long chat_id = update.callbackQuery().message().chat().id();
 
-
         EditMessageText newMessage = new EditMessageText(chat_id, message_id, paragraphText);
 
-        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("menu_main_page");
-        var k1 = new InlineKeyboardMarkup()
-                .addRow(backButton);
-
-        newMessage.replyMarkup(k1);
+        newMessage.replyMarkup(createKeyboard());
 
         TelegramBot bot = BotConfig.telegramBot;
         bot.execute(newMessage);
+    }
+
+    private InlineKeyboardMarkup createKeyboard() {
+        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("menu_main_page");
+        return new InlineKeyboardMarkup()
+                .addRow(backButton);
     }
 }
