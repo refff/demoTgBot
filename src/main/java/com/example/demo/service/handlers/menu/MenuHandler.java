@@ -1,6 +1,7 @@
 package com.example.demo.service.handlers.menu;
 
 import com.example.demo.configuration.BotConfig;
+import com.example.demo.service.RequestHandler;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
@@ -10,12 +11,12 @@ import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MenuHandler {
+public class MenuHandler implements RequestHandler {
 
     private InlineKeyboardMarkup keyboard;
     private String menuText = "Some menu text that have no sense cause i need it just to make message wider";
 
-    public void handleCommand(Update update) {
+    public void handle(Update update) {
         TelegramBot bot = BotConfig.telegramBot;
         keyboard = assignKeyboard();
 
@@ -39,8 +40,8 @@ public class MenuHandler {
 
         return new InlineKeyboardMarkup()
                 .addRow(profileButton)
-                .addRow(actionButton)
-                .addRow(nothingButton)
+                .addRow(actionButton, nothingButton)
+                .addRow()
                 .addRow(forwardButton);
     }
 

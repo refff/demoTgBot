@@ -5,10 +5,9 @@ import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MessageHandler implements RequestHandler {
+public class MessageHandler {
 
-    @Override
-    public String handleCommand(Update update) {
+    public String handle(Update update) {
         return update.message().text();
     }
 }

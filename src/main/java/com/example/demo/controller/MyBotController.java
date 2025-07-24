@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.configuration.BotConfig;
-import com.example.demo.service.handlers.menu.SecondMenuPageButtonHandler;
+import com.example.demo.service.handlers.menu.ProfileHandler;
+import com.example.demo.service.handlers.menu.SecondMenuHandler;
 import com.example.demo.service.handlers.menu.MenuHandler;
 import com.example.demo.service.handlers.MessageHandler;
 import com.example.demo.service.handlers.StartHandler;
@@ -20,19 +21,22 @@ public class MyBotController implements TelegramMvcController {
     private StartHandler startHandler;
     private MessageHandler messageHandler;
     private MenuHandler menuHandler;
-    private SecondMenuPageButtonHandler secondMenuPageButtonHandler;
+    private SecondMenuHandler secondMenuHandler;
+    private ProfileHandler profileHandler;
 
     @Autowired
     public MyBotController(StartHandler startHandler,
                            MessageHandler messageHandler,
                            BotConfig config,
                            MenuHandler menuHandler,
-                           SecondMenuPageButtonHandler secondMenuPageButtonHandler) {
+                           SecondMenuHandler secondMenuHandler,
+                           ProfileHandler profileHandler) {
         this.startHandler = startHandler;
         this.messageHandler = messageHandler;
         this.config = config;
         this.menuHandler = menuHandler;
-        this.secondMenuPageButtonHandler = secondMenuPageButtonHandler;
+        this.secondMenuHandler = secondMenuHandler;
+        this.profileHandler = profileHandler;
     }
 
     @Override
@@ -42,17 +46,17 @@ public class MyBotController implements TelegramMvcController {
 
     @BotRequest("/start")
     public String startBot(Update update) {
-        return startHandler.handleCommand(update);
+        return startHandler.handle(update);
     }
 
     @BotRequest("/menu")
     public void menu(Update update) {
-        menuHandler.handleCommand(update);
+        menuHandler.handle(update);
     }
 
     @MessageRequest
     public String messenger(Update update) {
-        return messageHandler.handleCommand(update);
+        return messageHandler.handle(update);
     }
 
     @CallbackQueryRequest(value = "menu_main_page")
@@ -72,6 +76,11 @@ public class MyBotController implements TelegramMvcController {
 
     @CallbackQueryRequest(value = "menuSecondPage")
     public void secondMenu(Update update) {
-        secondMenuPageButtonHandler.handle(update);
+        secondMenuHandler.handle(update);
+    }
+
+    @CallbackQueryRequest(value = "profile")
+    public void profile(Update update) {
+        profileHandler.handle(update);
     }
 }
