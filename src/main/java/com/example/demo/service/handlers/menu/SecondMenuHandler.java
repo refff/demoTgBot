@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 public class SecondMenuHandler implements RequestHandler {
 
     private String headerText;
-    private String paragraphText = "\nSecond menu page\n\n" +
-            "There're also nothing useful, just placeholder text to make message bigger";
+    private final String paragraphText = """
+            Second menu page
+            
+            There're also nothing useful, just placeholder text to make message bigger""";
 
     public void handle(Update update) {
         int message_id = update.callbackQuery().message().messageId();
@@ -23,7 +25,7 @@ public class SecondMenuHandler implements RequestHandler {
 
         EditMessageText newMessage = new EditMessageText(chat_id, message_id, paragraphText);
 
-        var backButton = new InlineKeyboardButton("⬅\uFE0F back").callbackData("menu_main_page");
+        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("menu_main_page");
         var k1 = new InlineKeyboardMarkup()
                 .addRow(backButton);
 
