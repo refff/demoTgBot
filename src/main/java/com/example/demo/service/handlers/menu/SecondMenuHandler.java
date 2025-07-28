@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class SecondMenuHandler implements RequestHandler {
 
     private String headerText;
-    private final String paragraphText = """
+    private final String bodyText = """
             Second menu page
             
             There're also nothing useful, just placeholder text to make message bigger""";
@@ -22,7 +22,7 @@ public class SecondMenuHandler implements RequestHandler {
         int message_id = update.callbackQuery().message().messageId();
         long chat_id = update.callbackQuery().message().chat().id();
 
-        EditMessageText newMessage = new EditMessageText(chat_id, message_id, paragraphText);
+        EditMessageText newMessage = new EditMessageText(chat_id, message_id, bodyText);
 
         newMessage.replyMarkup(createKeyboard());
 

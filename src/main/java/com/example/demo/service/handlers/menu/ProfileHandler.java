@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class ProfileHandler implements RequestHandler {
 
     private String headerText = "Your Profile\n";
-    private String paragraphText;
+    private String bodyText;
     private EditMessageText messageResponse;
     private UserProfileRepository userProfileRepository;
     private UserPRsRepository userPRsRepository;
@@ -34,10 +34,10 @@ public class ProfileHandler implements RequestHandler {
         long chatId = update.callbackQuery().message().chat().id();
         int messageId = update.callbackQuery().message().messageId();
 
-        paragraphText = messageCreator(update);
+        bodyText = messageCreator(update);
 
-        messageResponse = new EditMessageText(chatId, messageId, headerText +  paragraphText);
-        messageResponse.replyMarkup(assignKeyboard());
+        messageResponse = new EditMessageText(chatId, messageId, headerText + bodyText);
+        messageResponse.replyMarkup(createKeyboard());
 
         BotConfig.telegramBot.execute(messageResponse);
     }
@@ -67,7 +67,7 @@ public class ProfileHandler implements RequestHandler {
                 userPRs.getSquat());
     }
 
-    private InlineKeyboardMarkup assignKeyboard() {
+    private InlineKeyboardMarkup createKeyboard() {
         var backButton = new InlineKeyboardButton("⬅\uFE0F back").callbackData("menu_main_page");
         var editButton = new InlineKeyboardButton("\uD83E\uDE86 edit").callbackData("edit_profile");
 
