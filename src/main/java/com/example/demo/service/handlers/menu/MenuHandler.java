@@ -14,19 +14,19 @@ import org.springframework.stereotype.Service;
 public class MenuHandler implements RequestHandler {
 
     private InlineKeyboardMarkup keyboard;
-    private String menuText = "Some menu text that have no sense cause i need it just to make message wider";
+    private String textBody = "Some menu text that have no sense, i need it just to make message wider";
 
     public void handle(Update update) {
         TelegramBot bot = BotConfig.telegramBot;
         keyboard = assignKeyboard();
 
         if (update.callbackQuery() == null) {
-            SendMessage message = new SendMessage(update.message().chat().id().toString(), menuText);
+            var message = new SendMessage(update.message().chat().id().toString(), textBody);
             message.replyMarkup(keyboard);
             bot.execute(message);
         } else {
             int message_id = update.callbackQuery().message().messageId();
-            EditMessageText message = new EditMessageText(update.callbackQuery().message().chat().id().toString(), message_id, menuText);
+            var message = new EditMessageText(update.callbackQuery().message().chat().id().toString(), message_id, textBody);
             message.replyMarkup(keyboard);
             bot.execute(message);
         }
@@ -36,7 +36,7 @@ public class MenuHandler implements RequestHandler {
         var profileButton = new InlineKeyboardButton("\uD83D\uDC64 My profile").callbackData("profile");
         var actionButton = new InlineKeyboardButton("action").callbackData("action");
         var nothingButton = new InlineKeyboardButton("nothing").callbackData("nothing");
-        var forwardButton = new InlineKeyboardButton("next ➡\uFE0F").callbackData("menuSecondPage");
+        var forwardButton = new InlineKeyboardButton("next ➡️").callbackData("secondMenuPage");
 
         return new InlineKeyboardMarkup()
                 .addRow(profileButton)
@@ -44,5 +44,4 @@ public class MenuHandler implements RequestHandler {
                 .addRow()
                 .addRow(forwardButton);
     }
-
 }

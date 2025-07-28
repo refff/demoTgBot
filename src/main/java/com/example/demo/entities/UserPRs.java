@@ -15,11 +15,11 @@ public class UserPRs {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ColumnDefault(value = "'na'")
+    @ColumnDefault(value = "'n/a'")
     private String deadlift;
-    @ColumnDefault(value = "'na'")
+    @ColumnDefault(value = "'n/a'")
     private String squat;
-    @ColumnDefault(value = "'na'")
+    @ColumnDefault(value = "'n/a'")
     private String benchPress;
 
     @OneToOne(mappedBy = "pRs")

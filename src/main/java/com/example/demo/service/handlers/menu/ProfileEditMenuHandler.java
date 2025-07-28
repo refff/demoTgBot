@@ -33,6 +33,7 @@ public class ProfileEditMenuHandler implements RequestHandler {
         var squat = new  InlineKeyboardButton("squat").callbackData("changeSquat");
         var personality = new  InlineKeyboardButton("personality").callbackData("changePersonality");
         var backButton = new InlineKeyboardButton("⬅️ back").callbackData("profile");
+
         return new InlineKeyboardMarkup()
                 .addRow(deadlift)
                 .addRow(benchPress)

@@ -1,6 +1,6 @@
 package com.example.demo.service.handlers;
 
-import com.example.demo.controller.MyBotController;
+import com.example.demo.controller.CommandController;
 import com.example.demo.entities.UserPRs;
 import com.example.demo.entities.UserProfile;
 import com.example.demo.persistance.UserPRsRepository;
@@ -25,23 +25,22 @@ public class MessageHandler {
     public String handle(Update update) {
 
         String response;
-        String state = MyBotController.userState.get(update.message().chat().id());
+        String state = CommandController.userState.get(update.message().chat().id());
 
         if (state == null) {
             response = update.message().text();
         } else {
-            response =  messageDispatcher(update, state);
+            response =  handleUserUpdate(update, state);
         }
 
         return response;
     }
 
-    private String messageDispatcher(Update update, String state) {
+    private String handleUserUpdate(Update update, String state) {
         String username = update.message().from().username();
 
         UserProfile user = userProfileRepository.findByUsername(username);
         UserPRs prs = userPRsRepository.findByUserProfile(user);
-
 
         switch (state) {
             case "deadlift" -> prs.setDeadlift(update.message().text());
@@ -54,7 +53,7 @@ public class MessageHandler {
         }
 
         userPRsRepository.save(prs);
-        MyBotController.userState.clear();
+        CommandController.userState.clear();
 
         return "value " + state + " was changed to " + update.message().text();
     }

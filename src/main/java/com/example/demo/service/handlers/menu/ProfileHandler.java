@@ -68,7 +68,7 @@ public class ProfileHandler implements RequestHandler {
     }
 
     private InlineKeyboardMarkup createKeyboard() {
-        var backButton = new InlineKeyboardButton("⬅\uFE0F back").callbackData("menu_main_page");
+        var backButton = new InlineKeyboardButton("⬅\uFE0F back").callbackData("mainMenuPage");
         var editButton = new InlineKeyboardButton("\uD83E\uDE86 edit").callbackData("edit_profile");
 
         return new InlineKeyboardMarkup()

@@ -1,6 +1,6 @@
 package com.example.demo.service.handlers.menu;
 
-import com.example.demo.controller.MyBotController;
+import com.example.demo.controller.CommandController;
 import com.example.demo.service.RequestHandler;
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,6 @@ public class EditProfileInfo implements RequestHandler {
         long chatId = update.callbackQuery().message().chat().id();
         String state = null;
 
-
         switch (update.callbackQuery().data()) {
             case "changeDeadlift" -> state = "deadlift";
             case "changeBenchPress" -> state = "bench";
@@ -21,6 +20,6 @@ public class EditProfileInfo implements RequestHandler {
             case "changePersonality" -> state = "personality";
         }
 
-        MyBotController.userState.put(chatId, state);
+        CommandController.userState.put(chatId, state);
     }
 }
