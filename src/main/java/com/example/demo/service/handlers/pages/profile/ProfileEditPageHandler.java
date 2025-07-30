@@ -1,6 +1,7 @@
-package com.example.demo.service.handlers.menu;
+package com.example.demo.service.handlers.pages.profile;
 
-import com.example.demo.configuration.BotConfig;
+import com.example.demo.infrastructure.BotConfig;
+import com.example.demo.infrastructure.SendEditMessage;
 import com.example.demo.service.RequestHandler;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
@@ -9,10 +10,10 @@ import com.pengrad.telegrambot.request.EditMessageText;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ProfileEditMenuHandler implements RequestHandler {
+public class ProfileEditPageHandler implements RequestHandler {
 
     private String headerText = "Edit Profile\n";
-    private String bodyText = "\nWhich value do you want to change?";
+    private String textBody = "\nWhich value do you want to change?";
 
     private EditMessageText messageResponse;
 
@@ -21,10 +22,7 @@ public class ProfileEditMenuHandler implements RequestHandler {
         long chatId = update.callbackQuery().message().chat().id();
         int messageId = update.callbackQuery().message().messageId();
 
-        messageResponse = new EditMessageText(chatId, messageId, headerText + bodyText);
-        messageResponse.replyMarkup(createKeyboard());
-
-        BotConfig.telegramBot.execute(messageResponse);
+        SendEditMessage.sendMessage(chatId, messageId, headerText + textBody, createKeyboard());
     }
 
     private InlineKeyboardMarkup createKeyboard() {
@@ -32,7 +30,7 @@ public class ProfileEditMenuHandler implements RequestHandler {
         var benchPress = new  InlineKeyboardButton("bench press").callbackData("changeBenchPress");
         var squat = new  InlineKeyboardButton("squat").callbackData("changeSquat");
         var personality = new  InlineKeyboardButton("personality").callbackData("changePersonality");
-        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("profile");
+        var backButton = new InlineKeyboardButton("⬅️back").callbackData("profile");
 
         return new InlineKeyboardMarkup()
                 .addRow(deadlift)

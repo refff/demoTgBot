@@ -1,6 +1,6 @@
-package com.example.demo.service.handlers;
+package com.example.demo.service.handlers.message;
 
-import com.example.demo.controller.CommandController;
+import com.example.demo.controller.CallbackController;
 import com.example.demo.entities.UserPRs;
 import com.example.demo.entities.UserProfile;
 import com.example.demo.persistance.UserPRsRepository;
@@ -23,9 +23,8 @@ public class MessageHandler {
     }
 
     public String handle(Update update) {
-
         String response;
-        String state = CommandController.userState.get(update.message().chat().id());
+        String state = CallbackController.userState.get(update.message().chat().id());
 
         if (state == null) {
             response = update.message().text();
@@ -53,7 +52,7 @@ public class MessageHandler {
         }
 
         userPRsRepository.save(prs);
-        CommandController.userState.clear();
+        CallbackController.userState.clear();
 
         return "value " + state + " was changed to " + update.message().text();
     }

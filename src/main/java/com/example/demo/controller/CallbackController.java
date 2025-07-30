@@ -1,11 +1,20 @@
 package com.example.demo.controller;
 
-import com.example.demo.configuration.BotConfig;
-import com.example.demo.service.handlers.menu.*;
+import com.example.demo.infrastructure.BotConfig;
+import com.example.demo.service.RequestHandler;
+import com.example.demo.service.handlers.pages.menus.MainMenuHandler;
+import com.example.demo.service.handlers.pages.menus.SecondMenuHandler;
+import com.example.demo.service.handlers.pages.profile.EditProfileInfo;
+import com.example.demo.service.handlers.pages.profile.ProfileEditPageHandler;
+import com.example.demo.service.handlers.pages.profile.ProfilePageHandler;
+import com.example.demo.service.handlers.pages.training.MainTrainingPage;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.request.CallbackQueryRequest;
 import com.pengrad.telegrambot.model.Update;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @BotController
 public class CallbackController implements TelegramMvcController {
@@ -13,23 +22,28 @@ public class CallbackController implements TelegramMvcController {
     private final BotConfig botConfig;
 
     private SecondMenuHandler secondMenuHandler;
-    private ProfileHandler profileHandler;
-    private ProfileEditMenuHandler profileEditMenuHandler;
+    private ProfilePageHandler profilePageHandler;
+    private ProfileEditPageHandler profileEditPageHandler;
     private EditProfileInfo editProfileInfo;
-    private MenuHandler menuHandler;
+    private MainMenuHandler mainMenuHandler;
+    private MainTrainingPage trainingPage;
+
+    public static final Map<Long, String> userState = new HashMap<>();
 
     public CallbackController(BotConfig botConfig,
                               SecondMenuHandler secondMenuHandler,
-                              ProfileHandler profileHandler,
-                              ProfileEditMenuHandler profileEditMenuHandler,
+                              ProfilePageHandler profilePageHandler,
+                              ProfileEditPageHandler profileEditPageHandler,
                               EditProfileInfo editProfileInfo,
-                              MenuHandler menuHandler) {
+                              MainMenuHandler mainMenuHandler,
+                              MainTrainingPage trainingPage) {
         this.botConfig = botConfig;
         this.secondMenuHandler = secondMenuHandler;
-        this.profileHandler = profileHandler;
-        this.profileEditMenuHandler = profileEditMenuHandler;
+        this.profilePageHandler = profilePageHandler;
+        this.profileEditPageHandler = profileEditPageHandler;
         this.editProfileInfo = editProfileInfo;
-        this.menuHandler = menuHandler;
+        this.mainMenuHandler = mainMenuHandler;
+        this.trainingPage = trainingPage;
     }
 
     @Override
@@ -39,7 +53,12 @@ public class CallbackController implements TelegramMvcController {
 
     @CallbackQueryRequest(value = "mainMenuPage")
     public void back(Update update) {
-        menuHandler.handle(update);
+        mainMenuHandler.handle(update);
+    }
+
+    @CallbackQueryRequest(value = "secondMenuPage")
+    public void secondMenu(Update update) {
+        secondMenuHandler.handle(update);
     }
 
     @CallbackQueryRequest(value = "action")
@@ -52,23 +71,23 @@ public class CallbackController implements TelegramMvcController {
         return "nothing";
     }
 
-    @CallbackQueryRequest(value = "secondMenuPage")
-    public void secondMenu(Update update) {
-        secondMenuHandler.handle(update);
-    }
-
     @CallbackQueryRequest(value = "profile")
     public void profile(Update update) {
-        profileHandler.handle(update);
+        profilePageHandler.handle(update);
     }
 
     @CallbackQueryRequest("edit_profile")
     public void editProfile(Update update) {
-        profileEditMenuHandler.handle(update);
+        profileEditPageHandler.handle(update);
     }
 
     @CallbackQueryRequest("change*")
     public void changeProfileInfo(Update update) {
         editProfileInfo.handle(update);
+    }
+
+    @CallbackQueryRequest("training")
+    public void training(Update update) {
+        trainingPage.handle(update);
     }
 }

@@ -1,6 +1,6 @@
-package com.example.demo.service.handlers.menu;
+package com.example.demo.service.handlers.pages.profile;
 
-import com.example.demo.controller.CommandController;
+import com.example.demo.controller.CallbackController;
 import com.example.demo.service.RequestHandler;
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,6 @@ public class EditProfileInfo implements RequestHandler {
             case "changePersonality" -> state = "personality";
         }
 
-        CommandController.userState.put(chatId, state);
+        CallbackController.userState.put(chatId, state);
     }
 }
