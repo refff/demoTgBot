@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.pages.profile;
+package com.example.demo.service.pages.profile;
 
 import com.example.demo.infrastructure.SendEditMessage;
 import com.example.demo.service.RequestHandler;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class ProfileEditPageHandler implements RequestHandler {
 
     private final String headerText = "Edit Profile\n";
-    private final String textBody = "\nWhich value do you want to change?";
+    private final String textBody = "\nWhich field do you want to change?";
 
     @Override
     public void handle(Update update) {

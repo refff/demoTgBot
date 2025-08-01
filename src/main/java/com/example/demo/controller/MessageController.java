@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.infrastructure.BotConfig;
-import com.example.demo.service.handlers.message.MessageHandler;
+import com.example.demo.service.message.MessageHandler;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.request.MessageRequest;

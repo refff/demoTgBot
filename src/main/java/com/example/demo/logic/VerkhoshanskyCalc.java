@@ -57,7 +57,7 @@ public class VerkhoshanskyCalc {
         String rep8w2 =  String.format("%.1f x 12; ", max * 0.55);
         String w2 = "2nd workout: " + rep1w2 + rep2w2 + rep3w2 + rep4w2 + rep5w2 + rep6w2 + rep7w2 + rep8w2;
 
-        return "Week 1: \n" + w1 + "\n\n" + w2 + "\n\n\n";
+        return "*Week 1:* \n" + w1 + "\n\n" + w2 + "\n\n";
     }
 
     private String weekTwo() {
@@ -65,7 +65,6 @@ public class VerkhoshanskyCalc {
         String rep2w1 =  String.format("%.1f x 8; ", max * 0.55);
         String rep3w1 =  String.format("%.1f x 6; ", max * 0.65);
         String rep4w1 =  String.format("%.1f x 5; ", max * 0.70);
-        String rep5w1 =  String.format("%.1f x 5;5; ", max * 0.75);
         String w1 = "1st workout: " + rep1w1 + rep2w1 + rep3w1 + rep4w1;
 
         String rep1w2 =  String.format("%.1f x 10; ", max * 0.45);
@@ -78,7 +77,7 @@ public class VerkhoshanskyCalc {
         String rep8w2 =  String.format("%.1f x 10; ", max * 0.60);
         String w2 = "2nd workout: " + rep1w2 + rep2w2 + rep3w2 + rep4w2 + rep5w2 + rep6w2 + rep7w2 + rep8w2;
 
-        return "Week 2: \n" + w1 + "\n\n" + w2 + "\n\n\n";
+        return "*Week 2:* \n" + w1 + "\n\n" + w2 + "\n\n";
     }
 
     private String weekThree() {
@@ -101,7 +100,7 @@ public class VerkhoshanskyCalc {
             String rep8w2 =  String.format("%.1f x 10; ", max * 0.60);
             String w2 = "2nd workout: " + rep1w2 + rep2w2 + rep3w2 + rep4w2 + rep5w2 + rep6w2 + rep7w2 + rep8w2;
 
-            return "Week 3: \n" + w1 + "\n\n" + w2 + "\n\n\n";
+            return "*Week 3:* \n" + w1 + "\n\n" + w2 + "\n\n";
     }
 
     private String weekFour() {
@@ -122,7 +121,7 @@ public class VerkhoshanskyCalc {
         String rep8w2 =  String.format("%.1f x 6; ", max * 0.75);
         String w2 = "2nd workout: " + rep1w2 + rep2w2 + rep3w2 + rep4w2 + rep5w2 + rep6w2 + rep7w2 + rep8w2;
 
-        return "Week 4: \n" + w1 + "\n\n" + w2 + "\n\n\n";
+        return "*Week 4:* \n" + w1 + "\n\n" + w2 + "\n\n";
 }
 
     private String weekFive() {
@@ -140,7 +139,7 @@ public class VerkhoshanskyCalc {
         String rep6w2 =  String.format("%.1f x 2; ", max * 0.85);
         String w2 = "2nd workout: " + rep1w2 + rep2w2 + rep3w2 + rep4w2 + rep5w2 + rep6w2;
 
-        return "Week 5: \n" + w1 + "\n\n" + w2 + "\n\n\n";
+        return "*Week 5:* \n" + w1 + "\n\n" + w2 + "\n\n";
     }
 
     private String weekSix() {
@@ -163,6 +162,6 @@ public class VerkhoshanskyCalc {
         String rep10w2 =  String.format("%.1f x 1; ", max * 1.05);
         String w2 = "2nd workout: " + rep1w2 + rep2w2 + rep3w2 + rep4w2 + rep5w2 + rep6w2 + rep7w2 + rep8w2 +  rep9w2 + rep10w2;
 
-        return "Week 6: \n" + w1 + "\n\n" + w2 + "\n\n\n";
+        return "*Week 6:* \n" + w1 + "\n\n" + w2 + "\n\n";
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.commands;
+package com.example.demo.service.commands;
 
 import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Service;

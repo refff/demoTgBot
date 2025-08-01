@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.infrastructure.BotConfig;
-import com.example.demo.service.handlers.pages.training.MainTrainingPage;
-import com.example.demo.service.handlers.pages.training.calcs.VerkhoshanskyPlan;
-import com.example.demo.service.handlers.pages.training.plans.VerkhoshanskyMovements;
+import com.example.demo.service.pages.training.MainTrainingPage;
+import com.example.demo.service.pages.training.calcs.VerkhoshanskyPlan;
+import com.example.demo.service.pages.training.plans.VerkhoshanskyMovements;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.request.CallbackQueryRequest;

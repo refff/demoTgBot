@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.pages.menus;
+package com.example.demo.service.pages.menus;
 
 import com.example.demo.infrastructure.BotConfig;
 import com.example.demo.infrastructure.SendEditMessage;

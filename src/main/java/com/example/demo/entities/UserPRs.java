@@ -24,4 +24,6 @@ public class UserPRs {
 
     @OneToOne(mappedBy = "pRs")
     UserProfile userProfile;
+
+
 }

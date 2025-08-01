@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.infrastructure.BotConfig;
-import com.example.demo.service.handlers.pages.menus.MainMenuHandler;
-import com.example.demo.service.handlers.pages.menus.SecondMenuHandler;
-import com.example.demo.service.handlers.pages.profile.EditProfileInfo;
-import com.example.demo.service.handlers.pages.profile.ProfileEditPageHandler;
-import com.example.demo.service.handlers.pages.profile.ProfilePageHandler;
+import com.example.demo.service.pages.menus.MainMenuHandler;
+import com.example.demo.service.pages.menus.SecondMenuHandler;
+import com.example.demo.service.pages.profile.ProfileEditStateInitializer;
+import com.example.demo.service.pages.profile.ProfileEditPageHandler;
+import com.example.demo.service.pages.profile.ProfilePageHandler;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.request.CallbackQueryRequest;
@@ -22,7 +22,7 @@ public class CallbackController implements TelegramMvcController {
     private SecondMenuHandler secondMenuHandler;
     private ProfilePageHandler profilePageHandler;
     private ProfileEditPageHandler profileEditPageHandler;
-    private EditProfileInfo editProfileInfo;
+    private ProfileEditStateInitializer profileEditStateInitializer;
     private MainMenuHandler mainMenuHandler;
 
 
@@ -32,13 +32,13 @@ public class CallbackController implements TelegramMvcController {
                               SecondMenuHandler secondMenuHandler,
                               ProfilePageHandler profilePageHandler,
                               ProfileEditPageHandler profileEditPageHandler,
-                              EditProfileInfo editProfileInfo,
+                              ProfileEditStateInitializer profileEditStateInitializer,
                               MainMenuHandler mainMenuHandler) {
         this.botConfig = botConfig;
         this.secondMenuHandler = secondMenuHandler;
         this.profilePageHandler = profilePageHandler;
         this.profileEditPageHandler = profileEditPageHandler;
-        this.editProfileInfo = editProfileInfo;
+        this.profileEditStateInitializer = profileEditStateInitializer;
         this.mainMenuHandler = mainMenuHandler;
     }
 
@@ -79,6 +79,6 @@ public class CallbackController implements TelegramMvcController {
 
     @CallbackQueryRequest("change*")
     public void changeProfileInfo(Update update) {
-        editProfileInfo.handle(update);
+        profileEditStateInitializer.handle(update);
     }
 }

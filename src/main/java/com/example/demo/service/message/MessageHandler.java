@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.message;
+package com.example.demo.service.message;
 
 import com.example.demo.controller.CallbackController;
 import com.example.demo.entities.UserPRs;

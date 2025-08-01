@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.pages.profile;
+package com.example.demo.service.pages.profile;
 
 import com.example.demo.controller.CallbackController;
 import com.example.demo.service.RequestHandler;
@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.model.Update;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EditProfileInfo implements RequestHandler {
+public class ProfileEditStateInitializer implements RequestHandler {
 
     @Override
     public void handle(Update update) {

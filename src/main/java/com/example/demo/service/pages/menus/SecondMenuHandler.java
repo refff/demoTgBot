@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.pages.training;
+package com.example.demo.service.pages.menus;
 
 import com.example.demo.infrastructure.SendEditMessage;
 import com.example.demo.service.RequestHandler;
@@ -8,11 +8,13 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MainTrainingPage implements RequestHandler {
+public class SecondMenuHandler implements RequestHandler {
 
-    private final String textBody = "Choose prefer training plan";
+    private final String textBody = """
+            Second menu page
+            
+            There're also nothing useful, just placeholder text to make message bigger""";
 
-    @Override
     public void handle(Update update) {
         int messageId = update.callbackQuery().message().messageId();
         long chatId = update.callbackQuery().message().chat().id();
@@ -21,11 +23,9 @@ public class MainTrainingPage implements RequestHandler {
     }
 
     private InlineKeyboardMarkup createKeyboard() {
-        var verkhoshansky = new InlineKeyboardButton("verkhoshansky").callbackData("verkhoshansky");
         var backButton = new InlineKeyboardButton("⬅️ back").callbackData("mainMenuPage");
 
         return new InlineKeyboardMarkup()
-                .addRow(verkhoshansky)
                 .addRow(backButton);
     }
 }

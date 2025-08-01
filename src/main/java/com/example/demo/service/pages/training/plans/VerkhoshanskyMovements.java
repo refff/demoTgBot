@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.pages.training.calcs;
+package com.example.demo.service.pages.training.plans;
 
 import com.example.demo.infrastructure.SendEditMessage;
 import com.example.demo.logic.VerkhoshanskyCalc;
@@ -7,34 +7,31 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class VerkhoshanskyPlan implements RequestHandler {
+@Service
+public class VerkhoshanskyMovements implements RequestHandler {
 
-    private String textBody;
-
-    private final VerkhoshanskyCalc verkhoshanskyCalc;
-
-    @Autowired
-    public VerkhoshanskyPlan(VerkhoshanskyCalc verkhoshanskyCalc) {
-        this.verkhoshanskyCalc = verkhoshanskyCalc;
-    }
+    private String textBody = "Choose a movement to create a workout plan";
 
     @Override
     public void handle(Update update) {
         int messageId = update.callbackQuery().message().messageId();
         long chatId = update.callbackQuery().message().chat().id();
 
-        textBody = verkhoshanskyCalc.makePlan(update);
-
         SendEditMessage.sendMessage(chatId, messageId, textBody, createKeyboard());
     }
 
     private InlineKeyboardMarkup createKeyboard() {
-        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("verkhoshansky");
+        var deadlift = new InlineKeyboardButton("deadlift").callbackData("VerkhoshanskyPlanDeadlift");
+        var benchPress = new InlineKeyboardButton("benchPress").callbackData("VerkhoshanskyPlanBenchPress");
+        var squat = new InlineKeyboardButton("squat").callbackData("VerkhoshanskyPlanSquat");
+        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("training");
 
         return new InlineKeyboardMarkup()
+                .addRow(deadlift)
+                .addRow(benchPress)
+                .addRow(squat)
                 .addRow(backButton);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.demo.service.handlers.pages.profile;
+package com.example.demo.service.pages.profile;
 
 import com.example.demo.entities.UserPRs;
 import com.example.demo.entities.UserProfile;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ProfilePageHandler implements RequestHandler {
 
     private final UserDataLoader userDataLoader;
-    private String headerText = "Your Profile\n";
+    private String headerText = "*Your Profile:*\n";
     private String textBody;
 
     public ProfilePageHandler(UserDataLoader userDataLoader) {
@@ -35,18 +35,20 @@ public class ProfilePageHandler implements RequestHandler {
     private String messageCreator(Update update) {
         UserProfile user = userDataLoader.loadUserProfile(update);
         UserPRs userPRs = userDataLoader.loadUserPRs(user);
+        double summary = calculateSum(userPRs);
 
         return String.format("""
-                
                 username: %s
-
                 firstName: %s
                 lastName: %s
                 animal: %s
-
+                
+                *PR's:*
                 deadlift: %s kg
                 benchPress: %s kg
                 squat: %s kg
+                
+                *Summary: %.1f kg*
                 """,
                 user.getUsername(),
                 user.getFirstName(),
@@ -54,15 +56,25 @@ public class ProfilePageHandler implements RequestHandler {
                 user.getPersonality(),
                 userPRs.getDeadlift(),
                 userPRs.getBenchPress(),
-                userPRs.getSquat());
+                userPRs.getSquat(),
+                summary
+        );
     }
 
     private InlineKeyboardMarkup createKeyboard() {
         var backButton = new InlineKeyboardButton("⬅️ back").callbackData("mainMenuPage");
-        var editButton = new InlineKeyboardButton("\uD83E\uDE86edit").callbackData("edit_profile");
+        var editButton = new InlineKeyboardButton("\uD83E\uDE86 edit").callbackData("edit_profile");
 
         return new InlineKeyboardMarkup()
                 .addRow(editButton)
                 .addRow(backButton);
+    }
+
+    private double calculateSum(UserPRs userPRs) {
+        double deadlift = Double.parseDouble(userPRs.getDeadlift());
+        double benchPress = Double.parseDouble(userPRs.getBenchPress());
+        double squat = Double.parseDouble(userPRs.getSquat());
+
+        return deadlift + benchPress + squat;
     }
 }

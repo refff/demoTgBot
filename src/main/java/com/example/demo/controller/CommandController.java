@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.infrastructure.BotConfig;
-import com.example.demo.service.handlers.commands.StartHandler;
-import com.example.demo.service.handlers.pages.menus.MainMenuHandler;
+import com.example.demo.service.commands.StartHandler;
+import com.example.demo.service.pages.menus.MainMenuHandler;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.BotRequest;

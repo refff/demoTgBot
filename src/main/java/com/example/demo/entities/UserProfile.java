@@ -18,7 +18,6 @@ public class UserProfile {
     private String lastName;
     private String personality;
 
-
     @OneToOne
     @JoinColumn(name="userprs_id")
     private UserPRs pRs;
