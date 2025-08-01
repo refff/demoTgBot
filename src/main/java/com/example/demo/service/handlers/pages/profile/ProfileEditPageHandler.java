@@ -1,6 +1,5 @@
 package com.example.demo.service.handlers.pages.profile;
 
-import com.example.demo.infrastructure.BotConfig;
 import com.example.demo.infrastructure.SendEditMessage;
 import com.example.demo.service.RequestHandler;
 import com.pengrad.telegrambot.model.Update;
@@ -12,10 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProfileEditPageHandler implements RequestHandler {
 
-    private String headerText = "Edit Profile\n";
-    private String textBody = "\nWhich value do you want to change?";
-
-    private EditMessageText messageResponse;
+    private final String headerText = "Edit Profile\n";
+    private final String textBody = "\nWhich value do you want to change?";
 
     @Override
     public void handle(Update update) {
@@ -30,7 +27,7 @@ public class ProfileEditPageHandler implements RequestHandler {
         var benchPress = new  InlineKeyboardButton("bench press").callbackData("changeBenchPress");
         var squat = new  InlineKeyboardButton("squat").callbackData("changeSquat");
         var personality = new  InlineKeyboardButton("personality").callbackData("changePersonality");
-        var backButton = new InlineKeyboardButton("⬅️back").callbackData("profile");
+        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("profile");
 
         return new InlineKeyboardMarkup()
                 .addRow(deadlift)

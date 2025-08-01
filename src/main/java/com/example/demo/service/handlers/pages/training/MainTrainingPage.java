@@ -22,7 +22,7 @@ public class MainTrainingPage implements RequestHandler {
 
     private InlineKeyboardMarkup createKeyboard() {
         var verkhoshansky = new InlineKeyboardButton("verkhoshansky").callbackData("verkhoshansky");
-        var backButton = new InlineKeyboardButton("⬅️back").callbackData("mainMenuPage");
+        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("mainMenuPage");
 
         return new InlineKeyboardMarkup()
                 .addRow(verkhoshansky)

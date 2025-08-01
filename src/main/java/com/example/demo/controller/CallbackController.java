@@ -1,13 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.infrastructure.BotConfig;
-import com.example.demo.service.RequestHandler;
 import com.example.demo.service.handlers.pages.menus.MainMenuHandler;
 import com.example.demo.service.handlers.pages.menus.SecondMenuHandler;
 import com.example.demo.service.handlers.pages.profile.EditProfileInfo;
 import com.example.demo.service.handlers.pages.profile.ProfileEditPageHandler;
 import com.example.demo.service.handlers.pages.profile.ProfilePageHandler;
-import com.example.demo.service.handlers.pages.training.MainTrainingPage;
 import com.github.kshashov.telegram.api.TelegramMvcController;
 import com.github.kshashov.telegram.api.bind.annotation.BotController;
 import com.github.kshashov.telegram.api.bind.annotation.request.CallbackQueryRequest;
@@ -26,7 +24,7 @@ public class CallbackController implements TelegramMvcController {
     private ProfileEditPageHandler profileEditPageHandler;
     private EditProfileInfo editProfileInfo;
     private MainMenuHandler mainMenuHandler;
-    private MainTrainingPage trainingPage;
+
 
     public static final Map<Long, String> userState = new HashMap<>();
 
@@ -35,15 +33,13 @@ public class CallbackController implements TelegramMvcController {
                               ProfilePageHandler profilePageHandler,
                               ProfileEditPageHandler profileEditPageHandler,
                               EditProfileInfo editProfileInfo,
-                              MainMenuHandler mainMenuHandler,
-                              MainTrainingPage trainingPage) {
+                              MainMenuHandler mainMenuHandler) {
         this.botConfig = botConfig;
         this.secondMenuHandler = secondMenuHandler;
         this.profilePageHandler = profilePageHandler;
         this.profileEditPageHandler = profileEditPageHandler;
         this.editProfileInfo = editProfileInfo;
         this.mainMenuHandler = mainMenuHandler;
-        this.trainingPage = trainingPage;
     }
 
     @Override
@@ -84,10 +80,5 @@ public class CallbackController implements TelegramMvcController {
     @CallbackQueryRequest("change*")
     public void changeProfileInfo(Update update) {
         editProfileInfo.handle(update);
-    }
-
-    @CallbackQueryRequest("training")
-    public void training(Update update) {
-        trainingPage.handle(update);
     }
 }

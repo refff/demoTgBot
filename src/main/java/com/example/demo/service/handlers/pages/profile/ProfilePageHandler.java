@@ -8,7 +8,6 @@ import com.example.demo.entities.UserDataLoader;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
-import com.pengrad.telegrambot.request.EditMessageText;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,7 +58,7 @@ public class ProfilePageHandler implements RequestHandler {
     }
 
     private InlineKeyboardMarkup createKeyboard() {
-        var backButton = new InlineKeyboardButton("⬅️back").callbackData("mainMenuPage");
+        var backButton = new InlineKeyboardButton("⬅️ back").callbackData("mainMenuPage");
         var editButton = new InlineKeyboardButton("\uD83E\uDE86edit").callbackData("edit_profile");
 
         return new InlineKeyboardMarkup()
